@@ -21,6 +21,7 @@ import { Input } from "@/shared/components/ui/input";
 import { Button } from "@/shared/components/ui/button";
 import { EyeIcon, EyeClosedIcon } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   email: z
@@ -34,6 +35,7 @@ const formSchema = z.object({
 
 export default function LoginPage() {
   const [isShow, showPassword] = useState(false);
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,6 +47,7 @@ export default function LoginPage() {
 
   function onSubmit(value: z.infer<typeof formSchema>) {
     console.log(value);
+    navigate("/");
   }
 
   return (
