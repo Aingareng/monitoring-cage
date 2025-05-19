@@ -1,7 +1,14 @@
 import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
 import { Fan, LightbulbOff, Thermometer } from "lucide-react";
+import useDashboard from "../hooks/useDashboard";
 
 export default function SensorMonitoring() {
+  const { sensors, isLoading, isPending } = useDashboard();
+
+  if (isLoading || isPending) {
+    return <span>Memuat data...</span>;
+  }
+
   return (
     <Card className="w-full p-3 grid grid-cols-2">
       <Card className=" bg-stone-200 gap-0 inset-shadow-sm inset-shadow-stone-500 p-0">
@@ -10,7 +17,7 @@ export default function SensorMonitoring() {
         </CardHeader>
         <CardContent className="p-2 text-lg font-bold flex items-center">
           <Thermometer size={22} />
-          <span>80°C</span>
+          <span>{sensors?.data.temperature}°C</span>
         </CardContent>
       </Card>
 
@@ -18,7 +25,9 @@ export default function SensorMonitoring() {
         <CardHeader className="p-0">
           <h6 className="font-semibold p-2">Status Pakan</h6>
         </CardHeader>
-        <CardContent className="p-2 text-lg font-bold">Penuh</CardContent>
+        <CardContent className="p-2 text-lg font-bold">
+          {sensors?.data.feed_status}
+        </CardContent>
       </Card>
 
       <Card className="bg-stone-200 gap-0 inset-shadow-sm inset-shadow-stone-500 p-0">
@@ -27,7 +36,7 @@ export default function SensorMonitoring() {
         </CardHeader>
         <CardContent className="p-2 text-lg font-bold flex items-center gap-1">
           <LightbulbOff size={22} />
-          <span>Mati</span>
+          <span>{sensors?.data.lamp_status}</span>
         </CardContent>
       </Card>
 
@@ -37,7 +46,7 @@ export default function SensorMonitoring() {
         </CardHeader>
         <CardContent className="p-2 text-lg font-bold flex items-center gap-1">
           <Fan size={22} className="animate-spin" />
-          <span>Hidup</span>
+          <span>{sensors?.data.fan_status}</span>
         </CardContent>
       </Card>
 
@@ -46,7 +55,9 @@ export default function SensorMonitoring() {
           <CardHeader className="p-0">
             <h6 className="font-semibold p-2">Jumlah Pakan</h6>
           </CardHeader>
-          <CardContent className="p-2 text-lg font-bold">10</CardContent>
+          <CardContent className="p-2 text-lg font-bold">
+            {sensors?.data.feed_qty}
+          </CardContent>
         </Card>
       </div>
     </Card>

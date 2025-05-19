@@ -7,6 +7,11 @@ import { useState } from "react";
 
 export default function SchedulePage() {
   const [open, setOpen] = useState(false);
+
+  function handleOpenModal(state: boolean) {
+    setOpen(state);
+  }
+
   return (
     <div className="border size-full flex flex-col gap-5  p-3 ">
       <header className="text-primary gap-2 grid grid-cols-1 md:grid-cols-2">
@@ -18,7 +23,7 @@ export default function SchedulePage() {
       </header>
 
       <main className="flex items-start justify-center">
-        <ScheduleTable />
+        <ScheduleTable openUpdateModal={handleOpenModal} />
       </main>
 
       <Dialog open={open} onOpenChange={setOpen}>

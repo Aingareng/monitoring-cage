@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
+import { joinTime, splitTime } from "@/shared/utils/splitTime";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -28,9 +29,17 @@ const formSchema = z.object({
 interface IProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  initialData?: {
+    hour: string;
+    minute: string;
+  };
 }
 
-export default function AddScheduleForm({ open, onOpenChange }: IProps) {
+export default function AddScheduleForm({
+  initialData,
+  open,
+  onOpenChange,
+}: IProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,9 +48,16 @@ export default function AddScheduleForm({ open, onOpenChange }: IProps) {
   });
 
   function onSubmit(value: z.infer<typeof formSchema>) {
-    console.log(value);
+    const data = splitTime(value.time);
+    console.log("🚀 ~ onSubmit ~ data:", data);
     onOpenChange(false);
   }
+
+  useEffect(() => {
+    if (initialData) {
+      form.reset({ time: joinTime(initialData.hour, initialData.minute) });
+    }
+  }, [initialData, form]);
 
   useEffect(() => {
     if (!open) {

@@ -1,3 +1,4 @@
+import { Button } from "@/shared/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +16,11 @@ import {
 } from "@/shared/components/ui/table";
 import { Logs, Trash2, SquarePen } from "lucide-react";
 
-export default function ScheduleTable() {
+interface IProps {
+  openUpdateModal: (state: boolean) => void;
+}
+
+export default function ScheduleTable({ openUpdateModal }: IProps) {
   return (
     <Table>
       <TableCaption>Kase makan ayam jang mati</TableCaption>
@@ -56,7 +61,9 @@ export default function ScheduleTable() {
               <DropdownMenuContent className="w-max">
                 <DropdownMenuItem>
                   <SquarePen />
-                  Ubah
+                  <Button asChild onClick={() => openUpdateModal(true)}>
+                    Ubah
+                  </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Trash2 className="text-red-500" />
