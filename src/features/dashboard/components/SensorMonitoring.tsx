@@ -3,11 +3,12 @@ import { Fan, LightbulbOff, Thermometer } from "lucide-react";
 import useDashboard from "../hooks/useDashboard";
 
 export default function SensorMonitoring() {
-  const { sensors, isLoading, isPending } = useDashboard();
+  const { sensors } = useDashboard();
+  console.log("🚀 ~ SensorMonitoring ~ sensors:", sensors);
 
-  if (isLoading || isPending) {
-    return <span>Memuat data...</span>;
-  }
+  // if (isLoading || isPending) {
+  //   return <span>Memuat data...</span>;
+  // }
 
   return (
     <Card className="w-full p-3 grid grid-cols-2">
@@ -17,7 +18,7 @@ export default function SensorMonitoring() {
         </CardHeader>
         <CardContent className="p-2 text-lg font-bold flex items-center">
           <Thermometer size={22} />
-          <span>{sensors?.data.temperature}°C</span>
+          <span>{sensors?.data.suhu}°C</span>
         </CardContent>
       </Card>
 
@@ -26,7 +27,7 @@ export default function SensorMonitoring() {
           <h6 className="font-semibold p-2">Status Pakan</h6>
         </CardHeader>
         <CardContent className="p-2 text-lg font-bold">
-          {sensors?.data.feed_status}
+          {sensors?.data.status_pakan}
         </CardContent>
       </Card>
 
@@ -36,7 +37,7 @@ export default function SensorMonitoring() {
         </CardHeader>
         <CardContent className="p-2 text-lg font-bold flex items-center gap-1">
           <LightbulbOff size={22} />
-          <span>{sensors?.data.lamp_status}</span>
+          <span>{sensors?.data.status_lampu}</span>
         </CardContent>
       </Card>
 
@@ -46,7 +47,7 @@ export default function SensorMonitoring() {
         </CardHeader>
         <CardContent className="p-2 text-lg font-bold flex items-center gap-1">
           <Fan size={22} className="animate-spin" />
-          <span>{sensors?.data.fan_status}</span>
+          <span>{sensors?.data.status_kipas}</span>
         </CardContent>
       </Card>
 
@@ -56,7 +57,7 @@ export default function SensorMonitoring() {
             <h6 className="font-semibold p-2">Jumlah Pakan</h6>
           </CardHeader>
           <CardContent className="p-2 text-lg font-bold">
-            {sensors?.data.feed_qty}
+            {sensors?.data.jumlah_pakan}
           </CardContent>
         </Card>
       </div>

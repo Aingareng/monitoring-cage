@@ -1,9 +1,9 @@
 export interface ISensorData {
-  temperature: number;
-  feed_status: number | string | boolean;
-  fan_status: boolean;
-  lamp_status: boolean;
-  feed_qty: number;
+  suhu: number;
+  status_pakan: number | string | boolean;
+  status_kipas: boolean;
+  status_lampu: boolean;
+  jumlah_pakan: number;
 }
 export interface ISchedules {
   id: number;

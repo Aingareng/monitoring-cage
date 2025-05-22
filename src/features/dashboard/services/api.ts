@@ -7,7 +7,7 @@ import type {
 import type IApiResponse from "@/shared/types/apiResponse";
 
 export const getAllSensor = async () =>
-  api.get<IApiResponse<ISensorData>>("/sensors");
+  api.get<IApiResponse<ISensorData>>("/readData");
 
 export const getSchedules = async () =>
   api.get<IApiResponse<ISchedules>>("/schedules");
